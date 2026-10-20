@@ -1,16 +1,6 @@
 import { calculateConversion } from '../utils/convert'
-
-// Read api from .env or use default value, if env has no value.
 const FRANKFURTER_API = process.env.FRANKFURTER_API || 'https://api.frankfurter.app/latest'
 
-/**
- * Convert function call API for real-time exchange rate and uses pure function to calculate conversion.
- * 
- * @param from string Code for source currency.
- * @param to string Code for target currency.
- * @param amount number Amount to be converted for source currency.
- * @returns object with amount property
- */
 export const convert = async (from: string, to: string, amount: number): Promise<{ amount: number }> => {
   try {
     const { rate } = await fetchRate(from,to)
@@ -21,13 +11,7 @@ export const convert = async (from: string, to: string, amount: number): Promise
   }
 }
 
-/**
- * Fetch exchange rate from Frankfurter API for given currencies.
- * 
- * @param from string Code for source currency.
- * @param to string Code for target currency.
- * @returns object with rate property
- */
+
 const fetchRate = async(from: string, to:string): Promise<{ rate: number }> => {
   const response = await fetch(`${FRANKFURTER_API}?from=${from}&to=${to}`);
 
